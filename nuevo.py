@@ -3,43 +3,40 @@
 #Caso de uso: Registrar 10 encuentas 
 
 class Encuesta:
-    def __init__(self, preguntas, respuestas, nombre, edad):
+    def __init__(self, preguntas):
         self.preguntas = preguntas
-        self.respuestas = respuestas
-        self.nombre = nombre
-        self.edad = edad
+        self.respuestas = []
 
-    def resumen(self):
-        print(f"\nRespuestas de {self.nombre} (edad {self.edad}):")
-        for pregunta, respuesta in zip(self.preguntas, self.respuestas):
-            print(f"{pregunta} -> {respuesta}")
+
+    def agregar_respuestas(self):
+        for pregunta in self.preguntas:
+            respuesta = input(pregunta + ": ")
+            self.respuestas.append(respuesta)  
+
+    def mostrar_resultados(self):
+        print("Resultado de la encuesta")
+        for i in range(len(self.preguntas)):
+            print(f"{self.preguntas[i]}: {self.respuestas[i]}")
+        
+    def resumen(self):            
+        print("Resumen")
+        print(f"Total de preguntas: {len(self.preguntas)}")
+        print(f"Total de respuestas: {len(self.respuestas)}")
+
 
 def main():
-    print("Encuesta proyecto POO")
-    
-    encuestas = []  # Guardar todas las encuestas
+    print("Encuesta proyecto final")
 
     preguntas = [
+        "Nombre ", "Edad", 
         "1: ¿Qué tema prefieres para el proyecto?",
         "2: ¿Sabes trabajar en equipo?",
         "3: ¿Conoces alguna librería de Python?"
     ]
+    encuesta_poo = Encuesta(preguntas)
 
-    for _ in range(10):
-        nombre = input("En este campo escriba su nombre: ")
-        edad = int(input("En este campo escriba su edad: "))
+    encuesta_poo.agregar_respuestas()
+    encuesta_poo.mostrar_resultados()
+    encuesta_poo.resumen()
+main()    
 
-        respuestas = []
-        for pregunta in preguntas:
-            print(pregunta)
-            respuesta = input("Responda aquí: ")
-            respuestas.append(respuesta)
-
-        encuesta = Encuesta(preguntas, respuestas, nombre, edad)
-        encuestas.append(encuesta)
-
-    # Mostrar resumen de todas las encuestas
-    for encuesta in encuestas:
-        encuesta.resumen()
-
-main()
